@@ -1,0 +1,48 @@
+{% extends "layouts/base.html" %}
+{% load humanize %}
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+
+
+
+<div class="row">
+    <div class="col-lg-6 offset-lg-3">
+        <h1>Cart list</h1>
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in cart_items %}
+                <tr>
+                    
+                    <td>{{ c.name }} <br><a href="{% url 'book:detail' slug=c.slug %} " class="  " style="color:brown;">Back to book detail</a></td>
+                    
+                    <td><a href="{% url 'book:cart_add' slug=c.slug %}"><button class="btn btn-primary mx-3 "><i class="bi bi-plus-lg "></i></button></a>{{ c.qty }} 
+                        <a href="{% url 'book:cart_reduce' slug=c.slug %}" class="{% if c.qty == 0 %} disabled {% endif %}"><button class="btn btn-primary mx-3 {% if c.qty == 0 %}disabled{% endif %}"><i class="bi bi-dash-lg "></i></button></a></td>
+                    
+                    <td>{{ c.price }}</td>
+                    <td>
+                        <a href="{% url 'book:cart_delete' slug=c.slug %}">Delete all items</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        
+    </div>
+
+    
+
+</div>
+
+
+{% endblock %}

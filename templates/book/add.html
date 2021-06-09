@@ -1,0 +1,29 @@
+{% extends "layouts/base.html" %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block title %} Book Add {% endblock %}
+
+
+{% block content %}
+<h1 class="col-lg-8 offset-lg-2">Book add</h1>
+<div class="col-lg-6 offset-lg-3 mt-lg-3">
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="row">
+            <div class="col-6">
+                <a href="{% url 'book:index' %}" class="btn btn-secondary col-12 col-lg-5 mt-3 mb-3 ">Back to previous page</a>
+     
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-success col-12 col-lg-4 mt-3 mb-3 float-right">Save book</button>
+            </div>
+            
+        </div>
+        
+    </form>
+</div>
+
+
+   
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+{% load humanize %}
+{% block title %}Book Detail{% endblock %}
+
+{% block content %}
+
+<div class="row card-body d-flex ">
+    <div class="col-10 col-sm-7 col-md-6 col-lg-6 " >
+        
+        {% if book.image %}
+        <img src="{{ book.image.url }}" alt="image" class="img-fluid rounded mx-auto d-block rounded float-right">
+        {% endif %}
+        
+    </div>
+    <div class=" col-12 col-sm-5 col-md-6 col-lg-6 text-left datail-card ">
+        <h1>{{ book.name}}</h1>
+        
+        <div class="mb-2" >
+            <h6 >Category : {{ book.category }}</h6>
+            {% for a in book.author.all %}
+            <h6 class="badge badge-secondary ">{{ a.name }}</h6>
+            {% endfor %}
+            <h6>Price : {{ book.price|floatformat:2|intcomma }}</h6>
+          
+           
+            
+        </div>
+        <div class="mt-5">
+            <a href="{% url 'book:cart_add' slug=book.slug %}" class="btn btn-success datail-addtocard-btn mt-5">Add to Cart</a>
+           
+        </div>
+        
+    </div>
+</div>
+    
+    <div class="ml-4">
+        <h1>Comment ({{ book.get_comment_count }})</h1><br>
+    </div>
+    
+    {% for c in book.bookcomment_set.all %}
+    <div class="card mb-4 ml-5 mr-5">
+        <div class="card-body ">
+            <h5>{{ c.comment}}</h5>
+            <div>Rating: {{ c.rating }}</div>
+        </div>
+        
+    </div>
+    {% endfor %}
+   <a href="{% url 'book:index' %}" class="btn btn-secondary col-5 col-lg-2  ml-4 mt-3 mb-5 mx-2">Back to previous page</a>
+
+
+{% endblock %}
