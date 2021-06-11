@@ -26,8 +26,11 @@
             
         </div>
         <div class="mt-5">
-            <a href="{% url 'book:cart_add' slug=book.slug %}" class="btn btn-success datail-addtocard-btn mt-5">Add to Cart</a>
-           
+            
+            <a href="{% if not user.is_authenticated %}{% url 'apptest:login' %} {% else %} {% url 'book:cart_add' slug=book.slug %} {% endif %}" 
+            class="btn btn-success datail-addtocard-btn mt-5">Add to Cart</a>
+            <!-- <a href="{% url 'book:cart_add' slug=book.slug %}" class="btn btn-success datail-addtocard-btn mt-5">Add to Cart</a> -->
+          
         </div>
         
     </div>

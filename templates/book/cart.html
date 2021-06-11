@@ -30,7 +30,7 @@
                     
                     <td>{{ c.price }}</td>
                     <td>
-                        <a href="{% url 'book:cart_delete' slug=c.slug %}">Delete all items</a>
+                        <a href="{% url 'book:cart_delete' slug=c.slug %}">Delete item</a>
                     </td>
                 </tr>
                 {% endfor %}

@@ -7,6 +7,7 @@ from .forms import BookForm
 from slugify import slugify
 from django.contrib import messages
 
+
 # Create your views here.
 
 
@@ -155,3 +156,4 @@ def cart_delete(request, slug):
             break
     request.session['cart_items'] = cart_items
     return HttpResponseRedirect(reverse('book:cart_list', kwargs={}))
+

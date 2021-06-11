@@ -25,7 +25,7 @@
 
     <title>{% block title %}Test Project{% endblock %}</title>
   </head>
-  <body>
+  <body class="bg-color">
     <div
       style="margin-top: auto"
       class="
@@ -45,18 +45,28 @@
       <nav class="my-2 my-md-0 mr-md-1">
         <a class="p-2 text-dark" href="{% url 'apptest:index' %}">Home</a>
         <a class="p-2 text-dark" href="{% url 'book:index' %}">Book</a>
+        {% if user.is_authenticated %}
+        <a class="btn btn-success" href="{% url 'book:cart_list' %}"><i class="bi bi-cart3"> </i> <!--{{ request.session.cart_qty }}{{ request.session.cart_items }}-->
+          {{ request.session.cart_items|length }}</a>
+        {% endif %}
       </nav>
       
       
-      <a class="btn btn-secondary mx-2" href="{% url 'book:cart_list' %}"><i class="bi bi-cart3"> </i>{{ request.session.cart_qty }}</a>
-     
-
-      <a class="btn btn-outline-primary mx-2" href="#">Sign up</a>
+      {% if not user.is_authenticated %}
+      <a class="btn btn-outline-primary mx-2 mt-2 mt-sm-2 mt-md-0 mt-lg-0" href="{% url 'apptest:signup' %}">Sign up</a>
+      
       <a
         class="btn btn-outline-secondary mx-2 mt-2 mt-sm-2 mt-md-0 mt-lg-0"
-        href="#"
-        >Log in</a
-      >
+        href="{% url 'apptest:login' %}">Log in</a>
+       {% endif %} 
+
+        {% if user.is_authenticated %}
+        <span class="mx-2">Hello, {{ request.user.username }} </span>
+        <form method="post" action="{% url 'apptest:logout' %}" novalidate>
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger" >Log out</button>
+        </form>
+        {% endif %}
     </div>
 
     <div class="container-fluid">

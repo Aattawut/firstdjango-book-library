@@ -8,6 +8,7 @@ urlpatterns = [
     
     path('', views.index, name='index'),
     path('detail<slug:slug>/', views.detail, name='detail'),
+   
     re_path(r'add/$',views.book_add, name='book_add'),
     re_path(r'cart/add/(?P<slug>[\w-]+)/$', views.cart_add, name='cart_add'),
     re_path(r'cart/reduce/(?P<slug>[\w-]+)/$', views.cart_reduce, name='cart_reduce'),

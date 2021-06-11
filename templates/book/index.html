@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'book/style.css' %}" />
 
 <div class="row">
     <div class="col-12 col-md-4 col-lg-4 col-xl-2">
@@ -24,20 +26,20 @@
 
     </div>
     
-    <div class="col-12 col-md-8 col-lg-8 col-xl-9">
+    <div class="col-12 col-md-8 col-lg-8 col-xl-10">
         
         <h1>Book List</h1>
-       <div class="row" style="width: 100%;">
+       <div class="row aaa " >
            {% for b in books %}
-           <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-            <div class="card mb-2" >
+           <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2 ">
+            <div class="card mb-2 " >
                 {% if b.image %}
                 <a href="{% url 'book:detail' slug=b.slug %}">
-                    <img src="{{ b.image.url }}" alt="image" class="card-top">
+                    <img src="{{ b.image.url }}" alt="image" class="card-top zoom">
                 </a>
                 {% endif %}
                 <div class="card-body">
-                     <h5><a href="{% url 'book:detail' slug=b.slug %}">{{ b.name }}</a></h5>
+                     <h5 class="hidetext"><a href="{% url 'book:detail' slug=b.slug %}" style="z-index: 99999;" >{{ b.name }}</a></h5>
                      <div>Category: {{b.category.name}}</div>
                      <div>Price: {{b.price|floatformat:2|intcomma}}</div> 
                      <div>Author:</div>
